@@ -73,4 +73,4 @@ BOOL WINAPI DllMain(
 //create a way of bypassing the sv_cheats restriction
 //
 //create a way to spawn specific cheats
-//guns, noclip, spawn a boat and jeep, god mode too, will override the life hack
+//guns, noclip, spawn a boat and jeep, god mode too, will overwride the life hack
