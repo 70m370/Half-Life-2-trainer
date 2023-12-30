@@ -64,13 +64,4 @@ BOOL WINAPI DllMain(
 }
 
 
-//TO-do
-//
-// - out - doesnt make much sense in hl2.
-//multi-client through mutex manipulation - half life case is at launcher.dll 
-//
-// to-do
-//create a way of bypassing the sv_cheats restriction
-//
-//create a way to spawn specific cheats
-//guns, noclip, spawn a boat and jeep, god mode too, will overwride the life hack
+
