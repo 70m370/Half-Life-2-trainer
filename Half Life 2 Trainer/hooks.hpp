@@ -14,7 +14,7 @@ namespace hooks
 		return (*static_cast<void***>(thisptr))[index];
 	}
 
-	//thiscall because is a virtual function
+	
 	using EndSceneFn = long(__thiscall*)(void*, IDirect3DDevice9*) noexcept;
 	inline EndSceneFn EndSceneOriginal = nullptr;
 	long __stdcall EndScene(IDirect3DDevice9* device) noexcept;

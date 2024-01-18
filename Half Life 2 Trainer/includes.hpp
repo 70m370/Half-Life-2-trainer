@@ -7,6 +7,7 @@
 #include<TlHelp32.h>
 #include<iostream>
 #include<thread>
+#include<Psapi.h>
 
 #include"mem.hpp"
 

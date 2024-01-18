@@ -16,6 +16,8 @@ DWORD* player_secondary_shot = (DWORD*)(mem_module + 0XF0BC4);// function relate
 //super pistol
 DWORD* pistol_projectile_plus = (DWORD*)(mem_module + 0xF6E3D);
 
+//
+// Mem functions
 
 void mem::Patchbin(BYTE* dst, BYTE* inst, int size)
 {
@@ -25,6 +27,61 @@ void mem::Patchbin(BYTE* dst, BYTE* inst, int size)
     VirtualProtect(dst, size, oldprotec, &oldprotec);
 }
 
+
+DWORD mem::Patternscan(const char* BasseAddrs, const char* Patternsequence, const char* mask)
+{
+	//getting the module handle
+	HMODULE CurModuleBaseAddrs = GetModuleHandle(BasseAddrs);
+
+	std::cout << std::hex << CurModuleBaseAddrs << "\n";
+
+	MODULEINFO module_in;
+
+	if (CurModuleBaseAddrs = 0)
+	{
+		std::cout << "HMODULE NOT VALID" << std::endl;
+	}
+	else
+	{
+		GetModuleInformation(GetCurrentProcess(), CurModuleBaseAddrs, &module_in, sizeof(MODULEINFO));
+		std::cout << "Whole Module size = " << module_in.SizeOfImage << "\n";
+	}
+
+	DWORD base = (DWORD)GetModuleHandle(BasseAddrs);
+	DWORD size = (DWORD)module_in.SizeOfImage;
+
+	DWORD patternLenght = (DWORD)strlen(mask);
+
+	DWORD oldprotec;
+
+	VirtualProtect((DWORD*)base, sizeof(DWORD), PAGE_EXECUTE_READ, &oldprotec);
+
+	for (DWORD i = 0; i < size - patternLenght; i++)
+	{
+		bool found = true;
+
+		for (DWORD j = 0; j < patternLenght; j++)
+		{
+			found &= mask[j] == '?' || Patternsequence[j] == *(char*)(base + i + j);
+		}
+		if (found)
+		{
+			std::cout << " FOUND " << std::hex << base + i << "\n";
+
+			return base + i;
+		}
+
+	}
+	VirtualProtect((DWORD*)base, sizeof(DWORD), oldprotec, &oldprotec);
+	return 0;
+}
+
+
+
+
+
+//
+// hack functions - will go out
 DWORD hack_hl2::hacklife(int val)
 {
     int* life = (int*)(*player_life + 0xe0);

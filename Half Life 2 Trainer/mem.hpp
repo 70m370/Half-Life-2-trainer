@@ -3,8 +3,11 @@
 namespace mem
 {
 	void Patchbin(BYTE* dst, BYTE* inst, int size);
+	DWORD Patternscan(const char* BasseAddrs, const char* Patternsequence, const char* mask);
 }
 
+//
+//change this - ugly and unreliable - 
 namespace hack_hl2
 {
 	DWORD hacklife(int val);
