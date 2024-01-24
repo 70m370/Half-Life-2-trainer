@@ -77,9 +77,6 @@ DWORD mem::Patternscan(const char* BasseAddrs, const char* Patternsequence, cons
 }
 
 
-
-
-
 //
 // hack functions - will go out
 DWORD hack_hl2::hacklife(int val)
@@ -123,4 +120,17 @@ DWORD hack_hl2::restoreammo()
     mem::Patchbin((BYTE*)pistol_projectile_plus, (BYTE*)"\x8B\x45\x98", 3);
 
     return 0;
+}
+
+void hack_hl2::TestFuncCall()
+{
+	DWORD* funcptr = (DWORD*)(mem_module + 0x612D98);
+	printf("\nTEST before function call\n");
+	//trying to call this function
+	typedef int __stdcall TestGetLocalPlayer(DWORD*);
+	TestGetLocalPlayer* Localplayercall = (TestGetLocalPlayer*)(mem_module + 0x3FBF20);
+	int result = Localplayercall(funcptr);
+	printf("\nTEST after function call\n");
+	DEBUG("text calling function 0x%x",result);
+	//return true;
 }

@@ -2,6 +2,7 @@
 
 #define	WIN32_LEAN_AND_MEAN 
 
+#define DEBUG( text, ... ) printf( text "\n", __VA_ARGS__ )
 
 #include<Windows.h>
 #include<TlHelp32.h>

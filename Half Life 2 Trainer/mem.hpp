@@ -10,10 +10,14 @@ namespace mem
 //change this - ugly and unreliable - 
 namespace hack_hl2
 {
+	//super ugly, refacto needed
 	DWORD hacklife(int val);
 	DWORD hackammo();
 	DWORD superpistol();
 
 	//restorebytes section
 	DWORD restoreammo();
+
+	//test function call
+	void TestFuncCall();
 }

@@ -3,8 +3,15 @@
 #include"hooks.hpp"
 #include"gui.hpp"
 
+
+
+FILE* f;
+
 void Setup(const HMODULE instance)
 {
+    AllocConsole();
+    freopen_s(&f, "CONOUT$", "w", stdout);
+
     try
     {
         gui::Setup();
@@ -27,7 +34,11 @@ void Setup(const HMODULE instance)
     while (!GetAsyncKeyState(VK_END))
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        FreeConsole();
+        //FreeLibraryAndExitThread(reinterpret_cast<HMODULE>(instance), 0);
+        //goto UNLOAD;
     }
+
 
 UNLOAD:
     hooks::Destroy();

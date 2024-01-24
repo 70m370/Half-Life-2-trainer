@@ -195,6 +195,7 @@ void gui::Render() noexcept
 
 	//
 	// Menu and buttons
+	//DEBUG("test inside gui rendering loop");
 
 	if (ImGui::Begin("Half life 2 Internal Hack"))
 	{
@@ -209,10 +210,10 @@ void gui::Render() noexcept
 			}
 			if (mark_check_1 == true)
 			{
-				if (ImGui::Button("Super pistol"))
+				if (ImGui::Button("test function call"))
 				{
-					hack_hl2::superpistol();
-
+					//hack_hl2::superpistol();
+					hack_hl2::TestFuncCall(); //its not calling this function/ need to figure it out 
 				}
 			}
 			if (mark_check_1 == false)
