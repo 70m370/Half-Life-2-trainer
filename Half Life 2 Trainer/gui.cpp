@@ -205,7 +205,7 @@ void gui::Render() noexcept
 			static bool mark_check_2 = false;
 			if (ImGui::Checkbox("Infinity ammo", &mark_check_1))
 			{
-				hack_hl2::hackammo();
+				//hack_hl2::hackammo();
 
 			}
 			if (mark_check_1 == true)
@@ -218,7 +218,7 @@ void gui::Render() noexcept
 			}
 			if (mark_check_1 == false)
 			{
-				hack_hl2::restoreammo();
+				//hack_hl2::restoreammo();
 			}
 
 			ImGui::Spacing();
