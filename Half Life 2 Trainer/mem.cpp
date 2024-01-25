@@ -4,8 +4,9 @@
 
 DWORD mem_module = (DWORD)GetModuleHandle("server.dll");
 
-DWORD* player_life = (DWORD*)(mem_module + 0x68B8DC);
+DWORD* playerBase = *(DWORD**)(mem_module + 0x68B8DC);
 
+/*
 //guns - ammo
 DWORD* player_pistol_and_rifles = (DWORD*)(mem_module + 0xE73FA);//reversed some part of this function - check on ida
 DWORD* player_revol = (DWORD*)(mem_module + 0X3C030E);
@@ -15,6 +16,8 @@ DWORD* player_secondary_shot = (DWORD*)(mem_module + 0XF0BC4);// function relate
 
 //super pistol
 DWORD* pistol_projectile_plus = (DWORD*)(mem_module + 0xF6E3D);
+*/
+
 
 //
 // Mem functions
@@ -81,11 +84,16 @@ DWORD mem::Patternscan(const char* BasseAddrs, const char* Patternsequence, cons
 // hack functions - will go out
 DWORD hack_hl2::hacklife(int val)
 {
-    int* life = (int*)(*player_life + 0xe0);
-    *life = val;
+	playerBase[56] = val;
+
+    //int* life = (int*)(*playerBase + 0xE0);
+    //*life = val;
     return 0;
 }
 
+//
+// ugly part - remake all this shit - .370 is working. will make everything right
+/*
 DWORD hack_hl2::hackammo()
 {
     mem::Patchbin((BYTE*)player_pistol_and_rifles, (BYTE*)"\x90\x90", 2);
@@ -121,16 +129,19 @@ DWORD hack_hl2::restoreammo()
 
     return 0;
 }
-
+*/
 void hack_hl2::TestFuncCall()
 {
-	DWORD* funcptr = (DWORD*)(mem_module + 0x612D98);
+	//
+	//parameters for the 
+
 	printf("\nTEST before function call\n");
-	//trying to call this function
-	typedef int __stdcall TestGetLocalPlayer(DWORD*);
-	TestGetLocalPlayer* Localplayercall = (TestGetLocalPlayer*)(mem_module + 0x3FBF20);
-	int result = Localplayercall(funcptr);
-	printf("\nTEST after function call\n");
-	DEBUG("text calling function 0x%x",result);
-	//return true;
+
+	//Testing - possible crashing
+
+
+	typedef void(__cdecl* Fn_noclip_sub_1358A0)(DWORD* thisptr);
+	Fn_noclip_sub_1358A0 CallfuncTest = (Fn_noclip_sub_1358A0)(mem_module + 0x1358A0);
+	CallfuncTest(playerBase);
+
 }
