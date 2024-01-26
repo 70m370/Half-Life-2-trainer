@@ -19,5 +19,6 @@ namespace hack_hl2
 	DWORD restoreammo();
 
 	//test function call
-	void TestFuncCall();
+	void noclipON();
+	void noclipOFF();
 }

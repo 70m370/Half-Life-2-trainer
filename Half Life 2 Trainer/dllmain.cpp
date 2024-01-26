@@ -30,15 +30,16 @@ void Setup(const HMODULE instance)
 
         goto UNLOAD;
     }
-
+    
     while (!GetAsyncKeyState(VK_END))
     {
+        //need to check this unload method, problem here    
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         FreeConsole();
         //FreeLibraryAndExitThread(reinterpret_cast<HMODULE>(instance), 0);
         //goto UNLOAD;
     }
-
+    
 
 UNLOAD:
     hooks::Destroy();

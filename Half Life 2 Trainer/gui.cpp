@@ -203,21 +203,31 @@ void gui::Render() noexcept
 		{
 			static bool mark_check_1 = false;
 			static bool mark_check_2 = false;
-			if (ImGui::Checkbox("Infinity ammo", &mark_check_1))
+			if (ImGui::Checkbox("NOCLIP", &mark_check_1))
 			{
 				//hack_hl2::hackammo();
 
 			}
 			if (mark_check_1 == true)
 			{
-				if (ImGui::Button("test function call"))
+				//hack_hl2::noclipON();
+				
+				if (ImGui::Button("test NOCLIP-ON"))
 				{
 					//hack_hl2::superpistol();
-					hack_hl2::TestFuncCall(); //its not calling this function/ need to figure it out 
+					//hack_hl2::TestFuncCall(); //its not calling this function/ need to figure it out 
+					hack_hl2::noclipON();
+				}
+				if (ImGui::Button("test NOCLIP-OFF"))
+				{
+					//hack_hl2::superpistol();
+					//hack_hl2::TestFuncCall(); //its not calling this function/ need to figure it out 
+					hack_hl2::noclipOFF();
 				}
 			}
 			if (mark_check_1 == false)
 			{
+				//hack_hl2::noclipOFF();
 				//hack_hl2::restoreammo();
 			}
 

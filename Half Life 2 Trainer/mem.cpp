@@ -2,9 +2,15 @@
 
 //global section
 
-DWORD mem_module = (DWORD)GetModuleHandle("server.dll");
+DWORD ServerModule = (DWORD)GetModuleHandle("server.dll");
 
-DWORD* playerBase = *(DWORD**)(mem_module + 0x68B8DC);
+DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
+
+//
+//print on game internal console
+typedef void(__cdecl* Fn_noclip_sub_26B030)(DWORD* thisptr, int a2, int message, int a4, int a5, int a6, int a7);
+Fn_noclip_sub_26B030 PrintGameConsole = (Fn_noclip_sub_26B030)(ServerModule + 0x26B030);
+
 
 /*
 //guns - ammo
@@ -130,18 +136,40 @@ DWORD hack_hl2::restoreammo()
     return 0;
 }
 */
-void hack_hl2::TestFuncCall()
+
+//
+//NOCLIP ON
+void hack_hl2::noclipON()
 {
 	//
-	//parameters for the 
-
-	printf("\nTEST before function call\n");
-
-	//Testing - possible crashing
-
+	//parameters  - instantiated player on server.dll
 
 	typedef void(__cdecl* Fn_noclip_sub_1358A0)(DWORD* thisptr);
-	Fn_noclip_sub_1358A0 CallfuncTest = (Fn_noclip_sub_1358A0)(mem_module + 0x1358A0);
-	CallfuncTest(playerBase);
+	Fn_noclip_sub_1358A0 CallNoclipON = (Fn_noclip_sub_1358A0)(ServerModule + 0x1358A0);
+	CallNoclipON(playerBase);
+
+}
+
+//
+//NOCLIP OFF  - this function only prints stuff on the console as answer
+void hack_hl2::noclipOFF()
+{
+	
+	//Test - parameters ((int)v1, 2, (int)"noclip OFF\n", 0, 0, 0, 0);
+
+	
+	DWORD* addrs = *(DWORD**)((playerBase + 0x631618) + 0x1C);
+
+	// Print the address and the value
+	//printf("Address: %p, Value: %lu\n", addrs, *(DWORD*)addrs);
+
+
+	PrintGameConsole(playerBase, 2, (int)"test NOCLIP-OFF", 0, 0, 0, 0);
+
+	//FE540 - thiscall pass as stdcall and player instance as thisprt
+
+	typedef void(__stdcall* Fn_noclip_sub_FE540)(DWORD* thisptr); // didnt do nothing
+	Fn_noclip_sub_FE540 CallNoclipOFF = (Fn_noclip_sub_FE540)(ServerModule + 0x136300);
+	CallNoclipOFF(playerBase);
 
 }
