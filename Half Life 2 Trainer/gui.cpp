@@ -195,7 +195,6 @@ void gui::Render() noexcept
 
 	//
 	// Menu and buttons
-	//DEBUG("test inside gui rendering loop");
 
 	if (ImGui::Begin("Half life 2 Internal Hack"))
 	{
@@ -203,11 +202,38 @@ void gui::Render() noexcept
 		{
 			static bool mark_check_1 = false;
 			static bool mark_check_2 = false;
+
 			if (ImGui::Checkbox("NOCLIP", &mark_check_1))
 			{
-				//hack_hl2::hackammo();
+				if (mark_check_1 == true)
+				{
+					hack_hl2::noclipON();
+				}
+
+				if (mark_check_1 == false)
+				{
+					hack_hl2::noclipOFF();
+				}
 
 			}
+
+			ImGui::Spacing();
+
+			if (ImGui::Checkbox("GOD-MODE", &mark_check_2))
+			{
+				if (mark_check_2 == true)
+				{
+					hack_hl2::godmodeON();
+				}
+
+
+				if (mark_check_2 == false)
+				{
+					hack_hl2::godmodeOFF();
+				}
+
+			}
+			/*    refference on how to set buttons
 			if (mark_check_1 == true)
 			{
 				//hack_hl2::noclipON();
@@ -233,6 +259,7 @@ void gui::Render() noexcept
 
 			ImGui::Spacing();
 
+			// - change it to godmode
 			static bool testing_bool = false;
 			if (ImGui::Checkbox("Set Life", &testing_bool) || testing_bool == true)
 			{
@@ -245,7 +272,7 @@ void gui::Render() noexcept
 					hack_hl2::hacklife(100);
 				}
 
-			}
+			}*/
 			ImGui::EndChild();
 		}
 

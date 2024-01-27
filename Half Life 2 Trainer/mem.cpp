@@ -138,38 +138,32 @@ DWORD hack_hl2::restoreammo()
 */
 
 //
-//NOCLIP ON
+//	NOCLIP section
+//	IDA refference
+// [server.dll]_sub_134AE0 - related to noclip switch
 void hack_hl2::noclipON()
 {
-	//
-	//parameters  - instantiated player on server.dll
-
 	typedef void(__cdecl* Fn_noclip_sub_1358A0)(DWORD* thisptr);
 	Fn_noclip_sub_1358A0 CallNoclipON = (Fn_noclip_sub_1358A0)(ServerModule + 0x1358A0);
 	CallNoclipON(playerBase);
+}
 
+void hack_hl2::noclipOFF()
+{	
+	playerBase[78] = 0x20000; // 0x20000 = off / 0x80000 = on
+	//PrintGameConsole(playerBase, 2, (int)"test NOCLIP-OFF", 0, 0, 0, 0);
 }
 
 //
-//NOCLIP OFF  - this function only prints stuff on the console as answer
-void hack_hl2::noclipOFF()
+//	GODMODE SECTION
+//	IDA refference
+//[server.dll] sub_134810 - godmode switch
+void hack_hl2::godmodeON()
 {
-	
-	//Test - parameters ((int)v1, 2, (int)"noclip OFF\n", 0, 0, 0, 0);
+	playerBase[65] = 0x14081;
+}
 
-	
-	DWORD* addrs = *(DWORD**)((playerBase + 0x631618) + 0x1C);
-
-	// Print the address and the value
-	//printf("Address: %p, Value: %lu\n", addrs, *(DWORD*)addrs);
-
-
-	PrintGameConsole(playerBase, 2, (int)"test NOCLIP-OFF", 0, 0, 0, 0);
-
-	//FE540 - thiscall pass as stdcall and player instance as thisprt
-
-	typedef void(__stdcall* Fn_noclip_sub_FE540)(DWORD* thisptr); // didnt do nothing
-	Fn_noclip_sub_FE540 CallNoclipOFF = (Fn_noclip_sub_FE540)(ServerModule + 0x136300);
-	CallNoclipOFF(playerBase);
-
+void hack_hl2::godmodeOFF()
+{
+	playerBase[65] = 0x10081;
 }

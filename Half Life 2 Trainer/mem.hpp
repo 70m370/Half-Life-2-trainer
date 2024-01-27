@@ -18,7 +18,13 @@ namespace hack_hl2
 	//restorebytes section
 	DWORD restoreammo();
 
-	//test function call
+	//
+	//functions 
 	void noclipON();
 	void noclipOFF();
+
+	void godmodeON();
+	void godmodeOFF();
 }
+
+//cheatcodes - impulse 101 (all weapons)
