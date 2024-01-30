@@ -5,13 +5,9 @@
 
 
 
-FILE* f;
-
 void Setup(const HMODULE instance)
 {
-    AllocConsole();
-    freopen_s(&f, "CONOUT$", "w", stdout);
-
+  
     try
     {
         gui::Setup();
@@ -44,7 +40,6 @@ void Setup(const HMODULE instance)
 UNLOAD:
     hooks::Destroy();
     gui::Destroy();
-    FreeLibraryAndExitThread(instance, 0);
 }
 
 

@@ -143,9 +143,11 @@ DWORD hack_hl2::restoreammo()
 // [server.dll]_sub_134AE0 - related to noclip switch
 void hack_hl2::noclipON()
 {
+	/*
 	typedef void(__cdecl* Fn_noclip_sub_1358A0)(DWORD* thisptr);
 	Fn_noclip_sub_1358A0 CallNoclipON = (Fn_noclip_sub_1358A0)(ServerModule + 0x1358A0);
-	CallNoclipON(playerBase);
+	CallNoclipON(playerBase);*/
+	playerBase[78] = 0x80000;
 }
 
 void hack_hl2::noclipOFF()
