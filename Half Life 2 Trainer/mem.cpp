@@ -4,7 +4,6 @@
 
 DWORD ServerModule = (DWORD)GetModuleHandle("server.dll");
 
-DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
 
 //
 //print on game internal console
@@ -90,6 +89,9 @@ DWORD mem::Patternscan(const char* BasseAddrs, const char* Patternsequence, cons
 // hack functions - will go out
 DWORD hack_hl2::hacklife(int val)
 {
+	DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
+
+
 	playerBase[56] = val;
 
     //int* life = (int*)(*playerBase + 0xE0);
@@ -147,12 +149,21 @@ void hack_hl2::noclipON()
 	typedef void(__cdecl* Fn_noclip_sub_1358A0)(DWORD* thisptr);
 	Fn_noclip_sub_1358A0 CallNoclipON = (Fn_noclip_sub_1358A0)(ServerModule + 0x1358A0);
 	CallNoclipON(playerBase);*/
+
+	DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
+
+
 	playerBase[78] = 0x80000;
 }
 
 void hack_hl2::noclipOFF()
 {	
-	playerBase[78] = 0x20000; // 0x20000 = off / 0x80000 = on
+	DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
+
+
+	playerBase[78] = 0x20000; 
+	
+	// 0x20000 = off / 0x80000 = on
 	//PrintGameConsole(playerBase, 2, (int)"test NOCLIP-OFF", 0, 0, 0, 0);
 }
 
@@ -162,10 +173,16 @@ void hack_hl2::noclipOFF()
 //[server.dll] sub_134810 - godmode switch
 void hack_hl2::godmodeON()
 {
+	DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
+
+
 	playerBase[65] = 0x14081;
 }
 
 void hack_hl2::godmodeOFF()
 {
+	DWORD* playerBase = *(DWORD**)(ServerModule + 0x68B8DC);
+
+
 	playerBase[65] = 0x10081;
 }
