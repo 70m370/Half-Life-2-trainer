@@ -19,3 +19,7 @@ The primary motivation behind this project is to gain insights into the game's i
 ## Disclaimer
 
 This project is purely for educational purposes. Respect the intellectual property rights of the original game developers.
+
+## Preview
+
+![](Screenshot_1.png)
